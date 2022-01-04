@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\App.xaml
-11407045341
+101887179644
 
-5-1822825883
+20-1625045058
 194-164764702
-MainWindow.xaml;
+MainWindow.xaml;MVVM\View\BalanceView.xaml;MVVM\View\LibraryView.xaml;MVVM\View\ShopView.xaml;Theme\CartListItemTheme.xaml;Theme\DiscountedLabelTheme.xaml;Theme\ListItemTheme.xaml;Theme\MenuButtonTheme.xaml;Theme\ScrollbarTheme.xaml;Theme\ShoppingCartButtonTheme.xaml;
 
-False
+True
 

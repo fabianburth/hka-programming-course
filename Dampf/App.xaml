@@ -2,8 +2,31 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Dampf"
+             xmlns:viewModel="clr-namespace:Dampf.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Dampf.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ListItemTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ScrollbarTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ShoppingCartButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/DiscountedLabelTheme.xaml"/>
+                <ResourceDictionary Source="Theme/CartListItemTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:ShopViewModel}">
+                <view:ShopView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:LibraryViewModel}">
+                <view:LibraryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:BalanceViewModel}">
+                <view:BalanceView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

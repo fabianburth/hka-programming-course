@@ -4,9 +4,133 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dampf"
+        xmlns:view="clr-namespace:Dampf.MVVM.View"
+        xmlns:viewModel="clr-namespace:Dampf.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="600" Width="920"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
+        AllowsTransparency="True">
 
-    </Grid>
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Border Background="#272537"
+            CornerRadius="20"
+            MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="256"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Background="#22202f"
+                    BorderBrush="#272537"
+                    BorderThickness="0,0,0,1"
+                    CornerRadius="25,25,0,0">
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Label Content="Dampf"
+                           Foreground="#8D99AE" 
+                           Margin="8,0,0,0"
+                           FontWeight="SemiBold"/>
+
+                    <StackPanel HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Margin="0,0,8,0">
+
+                        <Button Width="20" Height="20"
+                                Content="_"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Foreground="DarkGray"
+                                FontWeight="Bold"
+                                Margin="0,0,0,4"
+                                Click="ButtonMinimize_Click"/>
+                        
+                        <Button Width="20" Height="20"
+                                Content="□"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Foreground="DarkGray"
+                                FontWeight="Bold"
+                                Click="ButtonMaximize_Click"/>
+                        
+                        <Button Width="20" Height="20"
+                                Content="✕"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Foreground="DarkGray"
+                                FontWeight="Bold"
+                                Click="ButtonClose_Click"/>
+                        
+                    </StackPanel>
+                </Grid>
+                       
+                
+            </Border>
+            
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Grid.Row="1"
+                        Grid.Column="0">
+
+                <RadioButton GroupName="Menu"
+                             Content="Laden"
+                             Width="128"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding ShopViewCommand}"/>
+
+                <RadioButton GroupName="Menu"
+                             Content="Bibliothek"
+                             Width="128"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding LibraryViewCommand}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Grid.Row="1"
+                        Grid.Column="1">
+
+                <RadioButton GroupName="Menu"
+                             Content="{Binding ShopViewModel.Shop.User.BalanceValue}"
+                             Width="128"
+                             Foreground="White"
+                             FontSize="16"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding BalanceViewCommand}"
+                             />
+
+                <TextBlock Text="{Binding ShopViewModel.Shop.User.Name}"
+                           Foreground="White"
+                           FontSize="16"
+                           Width="128" 
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"/>
+
+            </StackPanel>
+
+            <ContentControl Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Content="{Binding CurrentView}"/>
+        </Grid>
+
+
+    </Border>
 </Window>
