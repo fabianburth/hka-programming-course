@@ -25,7 +25,7 @@
                                        Foreground="AliceBlue"/>
                             <TextBlock Grid.Column="1"
                                        HorizontalAlignment="Center"
-                                       Text="{Binding PriceValue}"
+                                       Text="{Binding ActualPriceValue}"
                                        Foreground="AliceBlue"/>
                         </Grid>
                     </Border>

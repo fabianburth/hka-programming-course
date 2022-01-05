@@ -18,6 +18,7 @@ namespace Dampf
         /// In dieser Methode wird ein Spiel aus dem Laden dem Einkaufswagen hinzugefügt.
         /// Dazu soll an das Array gamesInCart ein Element "angehängt" werden, welches den 
         /// Titel des Spiels (per gameAddedToCart übergeben) enthält.
+        /// (Aufrufreihenfolge: CalculateActualGamePrice -> *AddGameToCart* -> CalculateCartPrice)
         /// 
         /// Beispiel:
         ///     gamesInCart enthält die Werte: 
@@ -80,11 +81,60 @@ namespace Dampf
         // What exactly is this supposed to do? Do we really want to do this? How to display bundles?
         //string[] AddBundleToCart(string[] gamesInCart, string[] gamesAddedToCart);
 
-        // Wenn ein Discount auf dem Spiel ist, dann könnte man ein Switch-Case/If-Statement machen,
-        // und abhängig vom Preis des Spiels die Höhe des Discounts festlegen
-        public static double CalculateCartPrice(double gamesInCartPrice, double addedGamePrice, bool discounted)
+        /// <summary>
+        /// Hier sollte der tatsächliche Preis des aktuell hinzugefügten Spiels berechnet werden. Diese
+        /// Methode wird jedes mal aufgerufen, wenn ein Spiel zum Warenkorb hinzugefügt wird. 
+        /// (Aufrufreihenfolge: *CalculateActualGamePrice* -> AddGameToCart -> CalculateCartPrice)
+        /// 
+        /// Der Spielpreis berechnet sich wie folgt:
+        /// - Wenn das Spiel NICHT im Angebot ist, dann gilt einfach Grundpreis = tatsächlicher Preis.
+        /// - Wenn das Spiel im Angebot ist, dann gilt:
+        ///     - Spiele UNTER      20€         erhalten    10% Rabatt
+        ///     - Spiele ZWISCHEN   20€ und 50€ erhalten    25% Rabatt ("ZWISCHEN" schließt hier also 20€ und 50€ mitein)
+        ///     - Spiele ÜBER       50€         erhalten    50% Rabatt
+        /// 
+        /// Der so berechnete Preis soll dann zurückgegeben werden.
+        /// </summary>
+        /// <param name="addedGameBasePrice">Der Grundpreis des Spiels, der den Rabatt NICHT berücksichtigt.</param>
+        /// <param name="discounted">Gibt an, ob es für dieses Spiel einen Rabatt gibt.</param>
+        /// <returns>Die tatsächlichen Kosten des Spiels nach Abzug des Rabatts.</returns>
+        public static double CalculateActualGamePrice(double addedGameBasePrice, bool discounted)
         {
-            return 0.0;
+            double actualGamePrice = addedGameBasePrice;
+            if(discounted)
+            {
+                if(addedGameBasePrice < 20)
+                {
+                    actualGamePrice = addedGameBasePrice * 0.9;
+                }
+                else if(addedGameBasePrice <= 50)
+                {
+                    actualGamePrice = addedGameBasePrice * 0.75;
+                }
+                else if(addedGameBasePrice > 50)
+                {
+                    actualGamePrice = addedGameBasePrice * 0.5;
+                }
+            }
+            return actualGamePrice;
+        }
+
+        /// <summary>
+        /// Hier soll einfach nur die Summe aller Spiele im Einkaufswagen berechnet werden. Diese
+        /// Methode wird jedes Mal aufgerufen, wenn ein Spiel zum Warenkorb hinzugefügt wird.
+        /// (Aufrufreihenfolge: CalculateActualGamePrice -> AddGameToCart -> *CalculateCartPrice*)
+        /// </summary>
+        /// <param name="pricesOfGamesInCart"></param>
+        /// <returns>Die Summe der tatsächlichen Preise aller Spiele im Warenkorb.</returns>
+        public static double CalculateCartPrice(double[] pricesOfGamesInCart)
+        {
+            double cartSum = 0;
+            for(int i = 0; i < pricesOfGamesInCart.Length; i++)
+            {
+                cartSum += pricesOfGamesInCart[i];
+            }
+
+            return cartSum;
         }
 
         // Return new account balance

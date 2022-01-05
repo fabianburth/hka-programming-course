@@ -67,7 +67,8 @@
                         Margin="8,8,8,0"
                         Cursor="Hand"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Command="{Binding BuyCartCommand}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>

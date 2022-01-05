@@ -21,7 +21,7 @@
                                            HorizontalAlignment="Center"
                                            FontSize="14"
                                            Foreground="Green"
-                                           Padding="2,2,2,4"/>
+                                           Padding="4,2,4,4"/>
 
                             </Grid>
                         </Border>

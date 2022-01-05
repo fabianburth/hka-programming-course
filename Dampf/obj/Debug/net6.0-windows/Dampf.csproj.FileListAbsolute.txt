@@ -28,8 +28,9 @@ C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\MVVM\View\Lib
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\MVVM\View\LibraryView.baml
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\MVVM\View\BalanceView.g.cs
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\MVVM\View\BalanceView.baml
-C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\ListItemTheme.baml
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\ScrollbarTheme.baml
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\ShoppingCartButtonTheme.baml
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\DiscountedLabelTheme.baml
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\CartListItemTheme.baml
+C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\LibraryListItemTheme.baml
+C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\ShopListItemTheme.baml

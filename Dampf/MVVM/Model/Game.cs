@@ -15,7 +15,11 @@ namespace Dampf.MVVM.Model
         private string[] _genre;
         private bool _isDiscounted;
         private double _price;
+        private double _actualPrice;
+        private int _playTime;
         private string _imageSource;
+
+        private string _playTimeValue;
 
         public Game(string title, OSPlatform[] platform, string[] genre, bool isDiscounted, double price)
         {
@@ -25,6 +29,10 @@ namespace Dampf.MVVM.Model
             _genre = genre;
             _isDiscounted = isDiscounted;
             _price = price;
+            _actualPrice = 0.0;
+            _playTime = Games.random.Next(0, 36000000);
+            _playTimeValue = _playTime.ToString();
+
             _count++;
         }
 
@@ -95,6 +103,37 @@ namespace Dampf.MVVM.Model
         }
 
         public string PriceValue { get => Price.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + " €"; }
+
+        public double ActualPrice
+        {
+            get { return _actualPrice; }
+            set
+            {
+                _actualPrice = value;
+                OnPropertyChanged("ActualPrice");
+            }
+        }
+
+        public string ActualPriceValue { get => ActualPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + " €"; }
+
+        public int PlayTime
+        {
+            get { return _playTime; }
+            set
+            {
+                _playTime = value;
+                _playTimeValue = _playTime.ToString();
+                OnPropertyChanged("PlayTime");
+                OnPropertyChanged("PlayTimeValue");
+            }
+        }
+
+        public string PlayTimeValue
+        {
+            // could add a playTimeFormatted and if this is initialized, we return the formatted time, this one otherwise
+            // probably shouldnt use a random number for comparability and checkability 
+            get { return _playTimeValue; }
+        }
 
         public string ImageSource
         {

@@ -9,11 +9,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/ListItemTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ShopListItemTheme.xaml"/>
                 <ResourceDictionary Source="Theme/ScrollbarTheme.xaml"/>
                 <ResourceDictionary Source="Theme/ShoppingCartButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/DiscountedLabelTheme.xaml"/>
                 <ResourceDictionary Source="Theme/CartListItemTheme.xaml"/>
+                <ResourceDictionary Source="Theme/LibraryListItemTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:ShopViewModel}">

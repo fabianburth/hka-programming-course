@@ -15,8 +15,6 @@ namespace Dampf.MVVM.ViewModel
         public LibraryViewModel LibraryViewModel { get; set; }
         public BalanceViewModel BalanceViewModel { get; set; }
 
-        public User CurrentUser { get; set; }
-
         private object _currentView;
 
         public object CurrentView
@@ -31,8 +29,9 @@ namespace Dampf.MVVM.ViewModel
 
         public MainViewModel()
         {
-            ShopViewModel = new ShopViewModel();
-            LibraryViewModel = new LibraryViewModel();
+            Shop shop = new Shop();
+            ShopViewModel = new ShopViewModel(shop);
+            LibraryViewModel = new LibraryViewModel(shop);
             BalanceViewModel = new BalanceViewModel();
             CurrentView = ShopViewModel;
 

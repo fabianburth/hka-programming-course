@@ -12,12 +12,14 @@ namespace Dampf.MVVM.ViewModel
         public Shop Shop { get; set; }
         public RelayCommand AddToCartCommand { get; set; }
         public RelayCommand RemoveFromCartCommand { get; set; }
+        public RelayCommand BuyCartCommand { get; set; }
 
-        public ShopViewModel()
+        public ShopViewModel(Shop shop)
         {
-            Shop = new Shop();
+            Shop = shop;
             AddToCartCommand = new RelayCommand(o => Shop.AddGameToCart((string)o));
             RemoveFromCartCommand = new RelayCommand(o => Shop.RemoveGameFromCart((string)o));
+            BuyCartCommand = new RelayCommand(o => Shop.BuyCart());
         }
 
     }

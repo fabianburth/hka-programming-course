@@ -33,7 +33,10 @@
     <Page Update="Theme\DiscountedLabelTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Theme\ListItemTheme.xaml">
+    <Page Update="Theme\LibraryListItemTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\ShopListItemTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Theme\MenuButtonTheme.xaml">

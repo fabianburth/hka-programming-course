@@ -9,6 +9,7 @@ namespace Dampf.MVVM.Model
     public static class Games
     {
         public static Dictionary<string, Game> games;
+        public static Random random = new Random();
 
         static Games()
         {

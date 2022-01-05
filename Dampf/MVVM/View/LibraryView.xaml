@@ -4,9 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dampf.MVVM.View"
+             xmlns:viewModel="clr-namespace:Dampf.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewModel:LibraryViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <CollectionViewSource
+            Source="{Binding Shop.Library.Games}"
+            x:Key="LibraryGamesDataView"/>
+    </UserControl.Resources>
+    
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="256"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Source={StaticResource LibraryGamesDataView}}"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  ItemContainerStyle="{StaticResource LibraryGameCard}"/>
+        <Border Grid.Column="1"
+                Background="#22202f"
+                BorderThickness="0"
+                CornerRadius="5"
+                Margin="5,3,5,3">
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Border>
+
     </Grid>
 </UserControl>
