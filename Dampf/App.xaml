@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="Theme/DiscountedLabelTheme.xaml"/>
                 <ResourceDictionary Source="Theme/CartListItemTheme.xaml"/>
                 <ResourceDictionary Source="Theme/LibraryListItemTheme.xaml"/>
+                <ResourceDictionary Source="Theme/BalanceListItemTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:ShopViewModel}">

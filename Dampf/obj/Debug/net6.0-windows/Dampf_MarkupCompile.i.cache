@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\App.xaml
-11-1453060743
+121837574146
 
 21-1175504615
 194-164764702
-MainWindow.xaml;MVVM\View\BalanceView.xaml;MVVM\View\LibraryView.xaml;MVVM\View\ShopView.xaml;Theme\CartListItemTheme.xaml;Theme\DiscountedLabelTheme.xaml;Theme\LibraryListItemTheme.xaml;Theme\MenuButtonTheme.xaml;Theme\ScrollbarTheme.xaml;Theme\ShopListItemTheme.xaml;Theme\ShoppingCartButtonTheme.xaml;
+MainWindow.xaml;MVVM\View\BalanceView.xaml;MVVM\View\LibraryView.xaml;MVVM\View\ShopView.xaml;Theme\BalanceListItemTheme.xaml;Theme\CartListItemTheme.xaml;Theme\DiscountedLabelTheme.xaml;Theme\LibraryListItemTheme.xaml;Theme\MenuButtonTheme.xaml;Theme\ScrollbarTheme.xaml;Theme\ShopListItemTheme.xaml;Theme\ShoppingCartButtonTheme.xaml;
 
-True
+False
 

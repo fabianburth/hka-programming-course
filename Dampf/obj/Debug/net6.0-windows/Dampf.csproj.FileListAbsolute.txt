@@ -34,3 +34,4 @@ C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\Discoun
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\CartListItemTheme.baml
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\LibraryListItemTheme.baml
 C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\ShopListItemTheme.baml
+C:\dev\HKA\Programmiervorkurs\Dampf\Dampf\obj\Debug\net6.0-windows\Theme\BalanceListItemTheme.baml

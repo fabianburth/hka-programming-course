@@ -65,7 +65,7 @@
                                 Foreground="DarkGray"
                                 FontWeight="Bold"
                                 Click="ButtonMaximize_Click"/>
-                        
+
                         <Button Width="20" Height="20"
                                 Content="✕"
                                 Background="Transparent"
@@ -73,7 +73,6 @@
                                 Foreground="DarkGray"
                                 FontWeight="Bold"
                                 Click="ButtonClose_Click"/>
-                        
                     </StackPanel>
                 </Grid>
                        

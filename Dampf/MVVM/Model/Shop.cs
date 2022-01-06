@@ -13,6 +13,7 @@ namespace Dampf.MVVM.Model
         public ObservableCollection<Game> Games { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
         public Library Library { get; set; }
+        public ObservableCollection<double> RechargeCredits { get; set; }
         public User User { get; set; }
 
         public Shop()
@@ -21,6 +22,7 @@ namespace Dampf.MVVM.Model
             ShoppingCart = new ShoppingCart(new ObservableCollection<Game>(), 0);
             Library = new Library(new ObservableCollection<Game>());
             User = new User("Spieler", "Passwort", 0.00);
+            RechargeCredits = new ObservableCollection<double> {5,10,25,50,100};
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -106,18 +108,36 @@ namespace Dampf.MVVM.Model
         }
         public void BuyCart()
         {
+            if (!DampfApp.IsAmountLeft(ShoppingCart.CartSum, User.Balance))
+            {
+                MessageBox.Show("Du hast nicht genug Guthaben, um diese Transaktion durchzuführen. Klicke auf den Betrag in der Menüleiste, um dein Guthaben aufzuladen.");
+                return;
+            }
+            User.Balance = DampfApp.Pay(ShoppingCart.CartSum, User.Balance);
             foreach(Game g in ShoppingCart.Games)
             {
-                // In theory, you could also remove the games from shop here
                 Library.Games.Add(g);
-                this.Games.Remove(g);
+                Games.Remove(g);
             }
+            Library.RefreshStatistics();
             ShoppingCart.Games.Clear();
             ShoppingCart.CartSum = 0;
             
         }
         public void RefundGame(string gameTitle)
         {
+            try
+            {
+                Game game = Model.Games.games[gameTitle];
+                User.Balance += game.ActualPrice;
+                Games.Add(game);
+                Library.Games.Remove(game);
+                Library.RefreshStatistics();
+            } 
+            catch (KeyNotFoundException e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
 
         }
 

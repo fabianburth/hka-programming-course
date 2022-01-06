@@ -3,10 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Dampf.MVVM.View"
+             xmlns:local="clr-namespace:Dampf.MVVM.View" xmlns:viewmodel="clr-namespace:Dampf.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:BalanceViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <CollectionViewSource
+            Source="{Binding Shop.RechargeCredits}"
+            x:Key="RechargeCreditsDataView"/>
+    </UserControl.Resources>
+
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="256"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView ItemsSource="{Binding Source={StaticResource RechargeCreditsDataView}}"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  ItemContainerStyle="{StaticResource BalanceCard}"/>
+        <Border Grid.Column="1"
+                Background="#22202f"
+                BorderThickness="0"
+                CornerRadius="5"
+                Margin="0,3,5,3"
+                Height="100"
+                VerticalAlignment="Top">
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="1"
+                       Content="Aktuelles Guthaben"
+                       FontSize="14"
+                       Foreground="#8D99AE"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Content="{Binding Shop.User.BalanceValue}"
+                       FontSize="24"
+                       Foreground="AliceBlue"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
     </Grid>
 </UserControl>

@@ -19,7 +19,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -57,6 +57,25 @@
                                    Content="{Binding PlayTimeValue}"
                                    Foreground="#8D99AE"
                                    Margin="0,0,8,0"/>
+                            <Button Grid.Row="2"
+                                    Grid.Column="3"
+                                    Content="Zurückgeben"
+                                    FontSize="14"
+                                    Background="#8D99AE"
+                                    BorderThickness="0"
+                                    Margin="0,0,4,4"
+                                    Padding="4,2,4,4"
+                                    Cursor="Hand"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Command="{Binding Path=DataContext.RefundGameCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding Title}">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
                         </Grid>
 
                     </Border>

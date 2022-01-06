@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Dampf.MVVM.Model
@@ -31,7 +32,7 @@ namespace Dampf.MVVM.Model
             _price = price;
             _actualPrice = 0.0;
             _playTime = Games.random.Next(0, 36000000);
-            _playTimeValue = _playTime.ToString();
+            _playTimeValue = FormatPlayTime(_playTime);
 
             _count++;
         }
@@ -122,7 +123,7 @@ namespace Dampf.MVVM.Model
             set
             {
                 _playTime = value;
-                _playTimeValue = _playTime.ToString();
+                _playTimeValue = FormatPlayTime(_playTime);
                 OnPropertyChanged("PlayTime");
                 OnPropertyChanged("PlayTimeValue");
             }
@@ -139,6 +140,16 @@ namespace Dampf.MVVM.Model
         {
             get { return _imageSource; }
             set { _imageSource = value; }
+        }
+
+        public static string FormatPlayTime(int playTime)
+        {
+            int[] formattedTimeArray = DampfApp.ConvertPlaytime(playTime);
+            if(formattedTimeArray != null && formattedTimeArray.Length > 0)
+            {
+                return "" + formattedTimeArray[0] + "d " + formattedTimeArray[1] + "h " + formattedTimeArray[2] + "m " + formattedTimeArray[3] + "s";
+            }
+            return playTime.ToString() + "s";
         }
 
     }

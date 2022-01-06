@@ -27,6 +27,9 @@
     <Page Update="MVVM\View\LibraryView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Theme\BalanceListItemTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Theme\CartListItemTheme.xaml">
       <SubType>Designer</SubType>
     </Page>

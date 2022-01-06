@@ -56,7 +56,7 @@ namespace Dampf.MVVM.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Dampf;V1.0.0.0;component/mvvm/view/shopview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Dampf;component/mvvm/view/shopview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\MVVM\View\ShopView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

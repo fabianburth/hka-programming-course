@@ -32,7 +32,7 @@ namespace Dampf.MVVM.ViewModel
             Shop shop = new Shop();
             ShopViewModel = new ShopViewModel(shop);
             LibraryViewModel = new LibraryViewModel(shop);
-            BalanceViewModel = new BalanceViewModel();
+            BalanceViewModel = new BalanceViewModel(shop);
             CurrentView = ShopViewModel;
 
             ShopViewCommand = new RelayCommand(o =>
