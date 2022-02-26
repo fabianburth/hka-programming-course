@@ -39,16 +39,10 @@ namespace Dampf
         /// <returns>Ein Array, das zusätzlich das neue Spiel beinhaltet.</returns>
         public static string[] AddGameToCart(string[] gamesInCart, string gameAddedToCart)
         {
-            string[] newCart = new string[gamesInCart.Length + 1];
 
-            for(int i = 0; i< gamesInCart.Length; i++)
-            {
-                newCart[i] = gamesInCart[i];
-            }
+          // TODO
 
-            newCart[gamesInCart.Length] = gameAddedToCart;
-
-            return newCart;
+            return new string[];
         }
 
         /// <summary>
@@ -70,19 +64,9 @@ namespace Dampf
         /// <returns>Ein Array, das das entfernte Spiel nichtmehr beinhaltet</returns>
         public static string[] RemoveGameFromCart(string[] gamesInCart, string gameRemovedFromCart)
         {
-            string[] newCart = new string[gamesInCart.Length - 1];
+          // TODO
 
-            int j = 0;
-            for( int i = 0; i < gamesInCart.Length ;i++)
-            {
-                if(!(gamesInCart[i] == gameRemovedFromCart))
-                {
-                    newCart[j] = gamesInCart[i];
-                    j++;
-                }
-            }
-
-            return newCart;
+          return new string[];
         }
         // What exactly is this supposed to do? Do we really want to do this? How to display bundles?
         //string[] AddBundleToCart(string[] gamesInCart, string[] gamesAddedToCart);
@@ -107,21 +91,9 @@ namespace Dampf
         public static double CalculateActualGamePrice(double addedGameBasePrice, bool discounted)
         {
             double actualGamePrice = addedGameBasePrice;
-            if(discounted)
-            {
-                if(addedGameBasePrice < 20)
-                {
-                    actualGamePrice = addedGameBasePrice * 0.9;
-                }
-                else if(addedGameBasePrice <= 50)
-                {
-                    actualGamePrice = addedGameBasePrice * 0.75;
-                }
-                else if(addedGameBasePrice > 50)
-                {
-                    actualGamePrice = addedGameBasePrice * 0.5;
-                }
-            }
+
+            // TODO
+
             return actualGamePrice;
         }
 
@@ -135,10 +107,8 @@ namespace Dampf
         public static double CalculateCartPrice(double[] pricesOfGamesInCart)
         {
             double cartSum = 0;
-            for(int i = 0; i < pricesOfGamesInCart.Length; i++)
-            {
-                cartSum += pricesOfGamesInCart[i];
-            }
+
+            // TODO
 
             return cartSum;
         }
@@ -153,7 +123,10 @@ namespace Dampf
         /// <returns>true, falls genug Guthaben vorhanden ist, false andernfalls</returns>
         public static bool IsAmountLeft(double cartPrice, double accountBalance)
         {
-            return cartPrice < accountBalance;
+
+          // TODO
+
+          return false
         }
 
         /// <summary>
@@ -165,7 +138,10 @@ namespace Dampf
         /// <returns>Das Guthaben des Benutzers nach Abzug des Preises der Spiele im Warenkorb</returns>
         public static double Pay(double cartPrice, double accountBalance)
         {
-            return accountBalance - cartPrice;
+
+            // TODO
+
+            return 0
         }
 
         // Ich würde sagen, wir lassen die Methode einfach weg, da es genau die gleiche Aufgabe wäre,
@@ -195,13 +171,9 @@ namespace Dampf
         /// <returns>Ein Array mit den Tagen, Stunden, Minuten und Sekunden Spielzeit</returns>
         public static int[] ConvertPlaytime(int seconds)
         {
-            int s = seconds % 60;
-            int TotalMinutes = seconds / 60;
-            int m = TotalMinutes % 60;
-            int TotalHours = TotalMinutes / 60;
-            int h = TotalHours % 24;
-            int d = TotalHours / 24;
-            return new int[] {d,h,m,s};
+
+            // TODO
+            return new int[] {};
         }
 
         // Sollen wir das wirklich machen?
@@ -225,10 +197,9 @@ namespace Dampf
         public static double CalculateTotalLibraryValue(double[] prices)
         {
             double total = 0;
-            for(int i = 0; i < prices.Length; i++)
-            {
-                total += prices[i];
-            }
+
+            // TODO
+
             return total;
         }
 
@@ -248,10 +219,9 @@ namespace Dampf
         public static int CalculateTotalLibraryPlayTime(int[] playTimes)
         {
             int total = 0;
-            for(int i = 0; i < playTimes.Length; i++)
-            {
-                total += playTimes[i];
-            }
+
+            // TODO
+
             return total;
         }
 
