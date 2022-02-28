@@ -5,6 +5,7 @@ using System.Windows;
 using Dampf.Core;
 using Dampf.MVVM.Model;
 using System.ComponentModel;
+using System.Runtime.ExceptionServices;
 
 namespace Dampf.MVVM.Model
 {
@@ -21,10 +22,17 @@ namespace Dampf.MVVM.Model
             Games = new ObservableCollection<Game>(Model.Games.games.Values);
             ShoppingCart = new ShoppingCart(new ObservableCollection<Game>(), 0);
             Library = new Library(new ObservableCollection<Game>());
-            string userName = DampfApp.SetUserName().ToLower();
-            string formattedUserName = DampfApp.FormatUserName(userName);
-            User = new User(formattedUserName.Length == 0 ? userName : formattedUserName, 0.00);
-            RechargeCredits = new ObservableCollection<double> {5,10,25,50,100};
+            try
+            {
+                string userName = DampfApp.SetUserName().ToLower();
+                string formattedUserName = DampfApp.FormatUserName(userName);
+                User = new User(formattedUserName.Length == 0 ? userName : formattedUserName, 0.00);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
+            RechargeCredits = new ObservableCollection<double> { 5, 10, 25, 50, 100 };
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -37,38 +45,50 @@ namespace Dampf.MVVM.Model
         // Method is called for every click on a shopping cart
         public void AddGameToCart(string gameTitle)
         {
+            Game game = Model.Games.games[gameTitle];
             try
             {
-                Game game = Model.Games.games[gameTitle];
-
-                // Call student implemented method
                 game.ActualPrice = DampfApp.CalculateActualGamePrice(game.Price, game.IsDiscounted);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
 
-                // Call student implemented method
-                string[] newCart = DampfApp.AddGameToCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
+            string[] newCart = null;
+            try
+            {
+                newCart = DampfApp.AddGameToCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
 
-                if (newCart != null)
+            if (newCart != null)
+            {
+                foreach (string g in newCart)
                 {
-                    foreach (string g in newCart)
+                    if (!ShoppingCart.Games.Contains(Model.Games.games[g]))
                     {
-                        if (!ShoppingCart.Games.Contains(Model.Games.games[g]))
-                        {
-                            ShoppingCart.Games.Add(Model.Games.games[gameTitle]);
-                        }
+                        ShoppingCart.Games.Add(Model.Games.games[gameTitle]);
                     }
                 }
+            }
 
-                // Prepare for and actually call student implemented method
-                double[] pricesOfGamesInCart = new double[ShoppingCart.Games.Count];
-                for (int i = 0; i < pricesOfGamesInCart.Length; i++)
-                {
-                    pricesOfGamesInCart[i] = ShoppingCart.Games[i].ActualPrice;
-                }
+            // Prepare for and actually call student implemented method
+            double[] pricesOfGamesInCart = new double[ShoppingCart.Games.Count];
+            for (int i = 0; i < pricesOfGamesInCart.Length; i++)
+            {
+                pricesOfGamesInCart[i] = ShoppingCart.Games[i].ActualPrice;
+            }
+            try
+            {
                 ShoppingCart.CartSum = DampfApp.CalculateCartPrice(pricesOfGamesInCart);
             }
-            catch (KeyNotFoundException e)
+            catch (Exception e)
             {
-                Console.Error.WriteLine(e.Message);
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
             }
         }
 
@@ -76,7 +96,15 @@ namespace Dampf.MVVM.Model
         public void RemoveGameFromCart(string gameTitle)
         {
             Game game = Model.Games.games[gameTitle];
-            string[] newCart = DampfApp.RemoveGameFromCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
+            string[] newCart = null;
+            try
+            {
+                newCart = DampfApp.RemoveGameFromCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
+            }
+            catch(Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
 
             if (ShoppingCart.Games.Count != 0 && newCart != null)
             {
@@ -102,7 +130,14 @@ namespace Dampf.MVVM.Model
                     {
                         pricesOfGamesInCart[i] = ShoppingCart.Games[i].ActualPrice;
                     }
-                    ShoppingCart.CartSum = DampfApp.CalculateCartPrice(pricesOfGamesInCart);
+                    try
+                    {
+                        ShoppingCart.CartSum = DampfApp.CalculateCartPrice(pricesOfGamesInCart);
+                    }
+                    catch (Exception e)
+                    {
+                        ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+                    }
 
                     foreach (Game g in gamesToRemove)
                     {
@@ -117,13 +152,20 @@ namespace Dampf.MVVM.Model
         }
         public void BuyCart()
         {
-            if (!DampfApp.IsAmountLeft(ShoppingCart.CartSum, User.Balance))
+            try
             {
-                MessageBox.Show("Du hast nicht genug Guthaben, um diese Transaktion durchzuführen. Klicke auf den Betrag in der Menüleiste, um dein Guthaben aufzuladen.");
-                return;
+                if (!DampfApp.IsAmountLeft(ShoppingCart.CartSum, User.Balance))
+                {
+                    MessageBox.Show("Du hast nicht genug Guthaben, um diese Transaktion durchzuführen. Klicke auf den Betrag in der Menüleiste, um dein Guthaben aufzuladen.");
+                    return;
+                }
+                User.Balance = DampfApp.Pay(ShoppingCart.CartSum, User.Balance);
             }
-            User.Balance = DampfApp.Pay(ShoppingCart.CartSum, User.Balance);
-            foreach(Game g in ShoppingCart.Games)
+            catch (Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
+            foreach (Game g in ShoppingCart.Games)
             {
                 Library.Games.Add(g);
                 Games.Remove(g);
@@ -131,7 +173,7 @@ namespace Dampf.MVVM.Model
             Library.RefreshStatistics();
             ShoppingCart.Games.Clear();
             ShoppingCart.CartSum = 0;
-            
+
         }
         public void RefundGame(string gameTitle)
         {
@@ -142,7 +184,7 @@ namespace Dampf.MVVM.Model
                 Games.Add(game);
                 Library.Games.Remove(game);
                 Library.RefreshStatistics();
-            } 
+            }
             catch (KeyNotFoundException e)
             {
                 Console.Error.WriteLine(e.Message);

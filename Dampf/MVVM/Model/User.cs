@@ -5,6 +5,7 @@ using System.Windows;
 using Dampf.Core;
 using Dampf.MVVM.Model;
 using System.ComponentModel;
+using System.Runtime.ExceptionServices;
 
 namespace Dampf.MVVM.Model
 {
@@ -56,7 +57,14 @@ namespace Dampf.MVVM.Model
 
         public void RechargeBalance(double amount) 
         {
-            Balance = DampfApp.AddToBalance(Balance, amount);
+            try
+            {
+                Balance = DampfApp.AddToBalance(Balance, amount);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Dampf.Core;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.ExceptionServices;
 
 namespace Dampf.MVVM.Model
 {
@@ -144,7 +146,15 @@ namespace Dampf.MVVM.Model
 
         public static string FormatPlayTime(int playTime)
         {
-            int[] formattedTimeArray = DampfApp.ConvertPlaytime(playTime);
+            int[] formattedTimeArray = null;
+            try
+            {
+                formattedTimeArray = DampfApp.ConvertPlaytime(playTime);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
             if(formattedTimeArray != null && formattedTimeArray.Length == 4)
             {
                 return "" + formattedTimeArray[0] + "d " + formattedTimeArray[1] + "h " + formattedTimeArray[2] + "m " + formattedTimeArray[3] + "s";

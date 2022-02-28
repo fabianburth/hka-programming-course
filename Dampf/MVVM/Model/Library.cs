@@ -5,6 +5,7 @@ using System.Windows;
 using Dampf.Core;
 using Dampf.MVVM.Model;
 using System.ComponentModel;
+using System.Runtime.ExceptionServices;
 
 namespace Dampf.MVVM.Model
 {
@@ -73,8 +74,15 @@ namespace Dampf.MVVM.Model
                 prices[i] = Games[i].Price;
                 playTimes[i] = Games[i].PlayTime;
             }
-            TotalWorth = DampfApp.CalculateTotalLibraryValue(prices);
-            TotalPlayTime = DampfApp.CalculateTotalLibraryPlayTime(playTimes);
+            try
+            {
+                TotalWorth = DampfApp.CalculateTotalLibraryValue(prices);
+                TotalPlayTime = DampfApp.CalculateTotalLibraryPlayTime(playTimes);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.DispatchException(ExceptionDispatchInfo.Capture(e));
+            }
         }
 
 
