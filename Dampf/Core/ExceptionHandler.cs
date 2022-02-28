@@ -4,9 +4,6 @@ using System.Runtime.ExceptionServices;
 
 namespace Dampf.Core
 {
-    // This is definitely not the best solution performance wise, but passing the ExceptionDispatchInfo allows to throw the exception
-    // with the stacktrace here again - hence it allows us to dispatch the exception handling neatly into a seperate class without losing information
-    // Passing the exception enables dynamic calling of the right method through overloading
     public class ExceptionHandler
     {
         public static void DispatchException(ExceptionDispatchInfo e)
