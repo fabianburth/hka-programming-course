@@ -45,11 +45,14 @@ namespace Dampf.MVVM.Model
                 // Call student implemented method
                 string[] newCart = DampfApp.AddGameToCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
 
-                foreach (string g in newCart)
+                if (newCart != null)
                 {
-                    if (!ShoppingCart.Games.Contains(Model.Games.games[g]))
+                    foreach (string g in newCart)
                     {
-                        ShoppingCart.Games.Add(Model.Games.games[gameTitle]);
+                        if (!ShoppingCart.Games.Contains(Model.Games.games[g]))
+                        {
+                            ShoppingCart.Games.Add(Model.Games.games[gameTitle]);
+                        }
                     }
                 }
 
@@ -70,40 +73,43 @@ namespace Dampf.MVVM.Model
         // Method is called for every click on trash can
         public void RemoveGameFromCart(string gameTitle)
         {
-            try
+            if (ShoppingCart.Games.Count != 0)
             {
-                Game game = Model.Games.games[gameTitle];
-                string[] newCart = DampfApp.RemoveGameFromCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
-                Collection<string> newCartCollection = new Collection<string>(newCart);
-                Collection<Game> gamesToRemove = new Collection<Game>();
-                foreach (Game g in ShoppingCart.Games)
+                try
                 {
-                    if (!newCartCollection.Contains(g.Title))
+                    Game game = Model.Games.games[gameTitle];
+                    string[] newCart = DampfApp.RemoveGameFromCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
+                    Collection<string> newCartCollection = new Collection<string>(newCart);
+                    Collection<Game> gamesToRemove = new Collection<Game>();
+                    foreach (Game g in ShoppingCart.Games)
                     {
-                        gamesToRemove.Add(g);
+                        if (!newCartCollection.Contains(g.Title))
+                        {
+                            gamesToRemove.Add(g);
+                        }
+                    }
+
+                    foreach (Game g in gamesToRemove)
+                    {
+                        ShoppingCart.Games.Remove(g);
+                    }
+
+                    double[] pricesOfGamesInCart = new double[ShoppingCart.Games.Count];
+                    for (int i = 0; i < pricesOfGamesInCart.Length; i++)
+                    {
+                        pricesOfGamesInCart[i] = ShoppingCart.Games[i].ActualPrice;
+                    }
+                    ShoppingCart.CartSum = DampfApp.CalculateCartPrice(pricesOfGamesInCart);
+
+                    foreach (Game g in gamesToRemove)
+                    {
+                        g.ActualPrice = 0;
                     }
                 }
-
-                foreach (Game g in gamesToRemove)
+                catch (KeyNotFoundException e)
                 {
-                    ShoppingCart.Games.Remove(g);
+                    Console.Error.WriteLine(e.Message);
                 }
-
-                double[] pricesOfGamesInCart = new double[ShoppingCart.Games.Count];
-                for (int i = 0; i < pricesOfGamesInCart.Length; i++)
-                {
-                    pricesOfGamesInCart[i] = ShoppingCart.Games[i].ActualPrice;
-                }
-                ShoppingCart.CartSum = DampfApp.CalculateCartPrice(pricesOfGamesInCart);
-
-                foreach (Game g in gamesToRemove)
-                {
-                    g.ActualPrice = 0;
-                }
-            }
-            catch (KeyNotFoundException e)
-            {
-                Console.Error.WriteLine(e.Message);
             }
         }
         public void BuyCart()

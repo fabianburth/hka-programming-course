@@ -2,7 +2,7 @@
 
 namespace Dampf
 {
-    public class DampfApp
+    public class DampfAppSolution
     {
         /// <summary>
         /// Diese Methode setzt den Benutzernamen.
@@ -10,7 +10,7 @@ namespace Dampf
         /// <returns>Benutzernamen des Benutzers</returns>
         public static string SetUserName()
         {
-            return "";
+            return "name";
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Dampf
         /// <returns>Benutzername in Großbuchstaben</returns>
         public static string FormatUserName(string userName)
         {
-            return "";
+            return userName.ToUpper();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Dampf
         /// <returns>Neues Gesamtguthaben des Benutzers</returns>
         public static double AddToBalance(double oldBalance, double amount)
         {
-            return 0.0;
+            return oldBalance + amount;
         }
 
         /// <summary>
@@ -55,7 +55,16 @@ namespace Dampf
         /// <returns>Ein Array, das zusätzlich das neue Spiel beinhaltet.</returns>
         public static string[] AddGameToCart(string[] gamesInCart, string gameAddedToCart)
         {
-            return null;
+            string[] newCart = new string[gamesInCart.Length + 1];
+
+            for (int i = 0; i < gamesInCart.Length; i++)
+            {
+                newCart[i] = gamesInCart[i];
+            }
+
+            newCart[gamesInCart.Length] = gameAddedToCart;
+
+            return newCart;
         }
 
         /// <summary>
@@ -77,7 +86,19 @@ namespace Dampf
         /// <returns>Ein Array, das das entfernte Spiel nichtmehr beinhaltet</returns>
         public static string[] RemoveGameFromCart(string[] gamesInCart, string gameRemovedFromCart)
         {
-            return null;
+            string[] newCart = new string[gamesInCart.Length - 1];
+
+            int j = 0;
+            for (int i = 0; i < gamesInCart.Length; i++)
+            {
+                if (!(gamesInCart[i] == gameRemovedFromCart))
+                {
+                    newCart[j] = gamesInCart[i];
+                    j++;
+                }
+            }
+
+            return newCart;
         }
 
         /// <summary>
@@ -99,7 +120,23 @@ namespace Dampf
         /// <returns>Die tatsächlichen Kosten des Spiels nach Abzug des Rabatts.</returns>
         public static double CalculateActualGamePrice(double addedGameBasePrice, bool discounted)
         {
-            return 0.0;
+            double actualGamePrice = addedGameBasePrice;
+            if (discounted)
+            {
+                if (addedGameBasePrice < 20)
+                {
+                    actualGamePrice = addedGameBasePrice * 0.9;
+                }
+                else if (addedGameBasePrice <= 50)
+                {
+                    actualGamePrice = addedGameBasePrice * 0.75;
+                }
+                else if (addedGameBasePrice > 50)
+                {
+                    actualGamePrice = addedGameBasePrice * 0.5;
+                }
+            }
+            return Math.Floor(actualGamePrice);
         }
 
         /// <summary>
@@ -111,7 +148,13 @@ namespace Dampf
         /// <returns>Die Summe der tatsächlichen Preise aller Spiele im Warenkorb</returns>
         public static double CalculateCartPrice(double[] pricesOfGamesInCart)
         {
-            return 0.0;
+            double cartSum = 0;
+            for (int i = 0; i < pricesOfGamesInCart.Length; i++)
+            {
+                cartSum += pricesOfGamesInCart[i];
+            }
+
+            return cartSum;
         }
 
         /// <summary>
@@ -124,7 +167,7 @@ namespace Dampf
         /// <returns>true, falls genug Guthaben vorhanden ist, false andernfalls</returns>
         public static bool IsAmountLeft(double cartPrice, double accountBalance)
         {
-            return false;
+            return cartPrice <= accountBalance;
         }
 
         /// <summary>
@@ -136,7 +179,7 @@ namespace Dampf
         /// <returns>Das Guthaben des Benutzers nach Abzug des Preises der Spiele im Warenkorb</returns>
         public static double Pay(double cartPrice, double accountBalance)
         {
-            return 0.0;
+            return accountBalance - cartPrice;
         }
 
         /// <summary>
@@ -150,7 +193,13 @@ namespace Dampf
         /// <returns>Ein Array mit den Tagen, Stunden, Minuten und Sekunden Spielzeit</returns>
         public static int[] ConvertPlaytime(int seconds)
         {
-            return null;
+            int s = seconds % 60;
+            int TotalMinutes = seconds / 60;
+            int m = TotalMinutes % 60;
+            int TotalHours = TotalMinutes / 60;
+            int h = TotalHours % 24;
+            int d = TotalHours / 24;
+            return new int[] { d, h, m, s };
         }
 
         /// <summary>
@@ -163,7 +212,12 @@ namespace Dampf
         /// <returns>Der Gesamtwert der Bibliothek</returns>
         public static double CalculateTotalLibraryValue(double[] prices)
         {
-            return 0.0;
+            double total = 0;
+            for (int i = 0; i < prices.Length; i++)
+            {
+                total += prices[i];
+            }
+            return total;
         }
 
         /// <summary>
@@ -177,7 +231,12 @@ namespace Dampf
         /// <returns>Die Gesamtspielzeit der Spiele in der Bibliothek</returns>
         public static int CalculateTotalLibraryPlayTime(int[] playTimes)
         {
-            return 0;
+            int total = 0;
+            for (int i = 0; i < playTimes.Length; i++)
+            {
+                total += playTimes[i];
+            }
+            return total;
         }
     }
 }
