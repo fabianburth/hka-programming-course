@@ -21,7 +21,9 @@ namespace Dampf.MVVM.Model
             Games = new ObservableCollection<Game>(Model.Games.games.Values);
             ShoppingCart = new ShoppingCart(new ObservableCollection<Game>(), 0);
             Library = new Library(new ObservableCollection<Game>());
-            User = new User(DampfApp.FormatUserName(DampfApp.SetUserName().ToLower()), 0.00);
+            string userName = DampfApp.SetUserName().ToLower();
+            string formattedUserName = DampfApp.FormatUserName(userName);
+            User = new User(formattedUserName.Length == 0 ? userName : formattedUserName, 0.00);
             RechargeCredits = new ObservableCollection<double> {5,10,25,50,100};
         }
 
@@ -73,12 +75,13 @@ namespace Dampf.MVVM.Model
         // Method is called for every click on trash can
         public void RemoveGameFromCart(string gameTitle)
         {
-            if (ShoppingCart.Games.Count != 0)
+            Game game = Model.Games.games[gameTitle];
+            string[] newCart = DampfApp.RemoveGameFromCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
+
+            if (ShoppingCart.Games.Count != 0 && newCart != null)
             {
                 try
                 {
-                    Game game = Model.Games.games[gameTitle];
-                    string[] newCart = DampfApp.RemoveGameFromCart(GameCollectionToTitleStringArray(ShoppingCart.Games), game.Title);
                     Collection<string> newCartCollection = new Collection<string>(newCart);
                     Collection<Game> gamesToRemove = new Collection<Game>();
                     foreach (Game g in ShoppingCart.Games)

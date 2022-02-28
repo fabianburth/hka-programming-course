@@ -145,7 +145,7 @@ namespace Dampf.MVVM.Model
         public static string FormatPlayTime(int playTime)
         {
             int[] formattedTimeArray = DampfApp.ConvertPlaytime(playTime);
-            if(formattedTimeArray != null && formattedTimeArray.Length > 0)
+            if(formattedTimeArray != null && formattedTimeArray.Length == 4)
             {
                 return "" + formattedTimeArray[0] + "d " + formattedTimeArray[1] + "h " + formattedTimeArray[2] + "m " + formattedTimeArray[3] + "s";
             }
