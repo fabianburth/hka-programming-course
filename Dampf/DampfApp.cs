@@ -4,10 +4,15 @@ namespace Dampf
 {
     public class DampfApp
     {
-        public static bool Login(string userName, string password)
+        /// <summary>
+        /// Diese Methode setzt den Benutzernamen.
+        /// </summary>
+        /// <returns>Benutzernamen des Benutzers</returns>
+        public static string SetUserName()
         {
-            return true;
+            return "Name";
         }
+
         /// <summary>
         /// In dieser Methode wird das Guthaben aufgeladen. Dazu muss das neu aufgeladene Guthaben zum bereits
         /// vorhandenen Guthaben des Benutzers addiert werden.
@@ -22,7 +27,7 @@ namespace Dampf
 
         /// <summary>
         /// In dieser Methode wird ein Spiel aus dem Laden dem Einkaufswagen hinzugefügt.
-        /// Dazu soll an das Array gamesInCart ein Element "angehängt" werden, welches den 
+        /// Dazu soll an das Array gamesInCart ein Element "angehängt" werden, welches den
         /// Titel des Spiels (per gameAddedToCart übergeben) enthält.
         /// (Aufrufreihenfolge: CalculateActualGamePrice -> *AddGameToCart* -> CalculateCartPrice)
         /// 
@@ -84,8 +89,6 @@ namespace Dampf
 
             return newCart;
         }
-        // What exactly is this supposed to do? Do we really want to do this? How to display bundles?
-        //string[] AddBundleToCart(string[] gamesInCart, string[] gamesAddedToCart);
 
         /// <summary>
         /// Hier sollte der tatsächliche Preis des aktuell hinzugefügten Spiels berechnet werden. Diese
@@ -153,7 +156,7 @@ namespace Dampf
         /// <returns>true, falls genug Guthaben vorhanden ist, false andernfalls</returns>
         public static bool IsAmountLeft(double cartPrice, double accountBalance)
         {
-            return cartPrice < accountBalance;
+            return cartPrice <= accountBalance;
         }
 
         /// <summary>
@@ -167,22 +170,6 @@ namespace Dampf
         {
             return accountBalance - cartPrice;
         }
-
-        // Ich würde sagen, wir lassen die Methode einfach weg, da es genau die gleiche Aufgabe wäre,
-        // wie AddGameToCart.
-        // (Alternativ könnte man auch AddGameToCart weglassen, aber dann würden fast alle Methoden
-        // "hinter" dem Kaufen-Button hängen, was vielleicht nicht ganz so schön ist. So haben sie
-        // das Gefühl, dass sie sowohl das Hinzufügen zum Warenkorb durch die AddGameToCart-Methode, als
-        // auch das Kaufen durch die IsAmountLeft- und Pay-Methoden implementieren.
-        //public static string[] AddGamesToLibrary(string[] gamesInLibrary, string[] newGames)
-        //{
-        //    return null;
-        //}
-        // Analoge Begründung zu AddGamesToLibrary
-        //public static string[] RemoveGamesFromStore(string[] gamesInStore, string[] newGames)
-        //{
-        //    return null;
-        //}
 
         /// <summary>
         /// Standardmäßig werden die Spielzeiten in Sekunden (s) angezeigt. Das ist unschön und nur
@@ -204,16 +191,6 @@ namespace Dampf
             return new int[] {d,h,m,s};
         }
 
-        // Sollen wir das wirklich machen?
-        // Hatte hier keinen speziellen Grund das wegzulassen, außer dass es etwas aufwändiger umzusetzen ist
-        // und wir wahrscheinlich schon genug Methoden haben.
-        // Sortieraufgaben sind algorithmisch zudem schon relativ anspruchsvoll, vielleicht aber gerade deshalb eine nette Aufgabe
-        // Können wir gerne nochmal diskutieren
-        //public static string[] OrderGamesInShopByPrice(string[] gamesInShop, bool ascending)
-        //{
-        //    return null;
-        //}
-
         /// <summary>
         /// Hier soll der Gesamtwert der Spiele in der Bibliothek berechnet werden (Man will ja wissen, wie viel Geld
         /// man schon so verschwendet hat ;) ).
@@ -232,10 +209,6 @@ namespace Dampf
             return total;
         }
 
-        // Die hier habe ich noch hinzugefügt, da ich das Gefühl hatte, dass ich mich als Student sonst
-        // Fragen würde, warum ich den Total Value berechnen musste, nicht aber die Total Playtime.
-        // Zudem ist das ja dann quasi nur noch Copy-Pase und damit ein schnelles und fast kostenloses
-        // Erfolgsgefühl :)
         /// <summary>
         /// Hier soll die Gesamtzeit der Spiele in der Bibliothek berechnet werden (Man will ja wissen, wie viel Zeit
         /// man schon so verschwendet hat ;) ).
@@ -254,18 +227,5 @@ namespace Dampf
             }
             return total;
         }
-
-
-
-        // Optionally for pros - one line is [dd|hh|mm|ss], one line for each game (two dimensional array)
-        // Können wir so machen, damit 2-dimensionale Arrays dabei sind, ist aber etwas künstlich hier
-        // das 2-dimensionale Array reinzugeben, anstatt einfach die Sekunden
-        // Da sie wahrscheinlich aber keine 2-dimensionalen Arrays kennen, sollten wir das mit den 
-        // Fachschaftlern absprechen, tendentiell würde ich das eher durch die aktuelle "CalculateTotalLibraryPlayTime"
-        // ersetzen
-        //public static int[] CalculateTotalLibraryPlaytime(int[][] playTime)
-        //{
-        //    return null;
-        //}
     }
 }

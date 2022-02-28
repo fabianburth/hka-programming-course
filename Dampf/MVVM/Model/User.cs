@@ -11,13 +11,11 @@ namespace Dampf.MVVM.Model
     public class User : INotifyPropertyChanged
     {
         private string _name;
-        private string _password;
         private double _balance;
         private string _balanceValue;
-        public User(string name, string password, double balance)
+        public User(string name, double balance)
         {
             _name = name;
-            _password = password;
             _balance = balance;
             _balanceValue = Balance.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + " €";
         }
@@ -36,15 +34,6 @@ namespace Dampf.MVVM.Model
             {
                 _name = value;
                 OnPropertyChanged("Name");
-            }
-        }
-        public string Password
-        {
-            get { return _password; }
-            set
-            {
-                _password = value;
-                OnPropertyChanged("Password");
             }
         }
 
