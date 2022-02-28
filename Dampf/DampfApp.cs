@@ -55,7 +55,10 @@ namespace Dampf
         /// <returns>Ein Array, das zusätzlich das neue Spiel beinhaltet.</returns>
         public static string[] AddGameToCart(string[] gamesInCart, string gameAddedToCart)
         {
-            return null;
+
+          // TODO
+
+            return new string[];
         }
 
         /// <summary>
@@ -77,7 +80,9 @@ namespace Dampf
         /// <returns>Ein Array, das das entfernte Spiel nichtmehr beinhaltet</returns>
         public static string[] RemoveGameFromCart(string[] gamesInCart, string gameRemovedFromCart)
         {
-            return null;
+          // TODO
+
+          return new string[];
         }
 
         /// <summary>
@@ -99,7 +104,11 @@ namespace Dampf
         /// <returns>Die tatsächlichen Kosten des Spiels nach Abzug des Rabatts.</returns>
         public static double CalculateActualGamePrice(double addedGameBasePrice, bool discounted)
         {
-            return 0.0;
+            double actualGamePrice = addedGameBasePrice;
+
+            // TODO
+
+            return actualGamePrice;
         }
 
         /// <summary>
@@ -111,7 +120,11 @@ namespace Dampf
         /// <returns>Die Summe der tatsächlichen Preise aller Spiele im Warenkorb</returns>
         public static double CalculateCartPrice(double[] pricesOfGamesInCart)
         {
-            return 0.0;
+            double cartSum = 0;
+
+            // TODO
+
+            return cartSum;
         }
 
         /// <summary>
@@ -124,7 +137,10 @@ namespace Dampf
         /// <returns>true, falls genug Guthaben vorhanden ist, false andernfalls</returns>
         public static bool IsAmountLeft(double cartPrice, double accountBalance)
         {
-            return false;
+
+          // TODO
+
+          return false
         }
 
         /// <summary>
@@ -136,7 +152,10 @@ namespace Dampf
         /// <returns>Das Guthaben des Benutzers nach Abzug des Preises der Spiele im Warenkorb</returns>
         public static double Pay(double cartPrice, double accountBalance)
         {
-            return 0.0;
+
+            // TODO
+
+            return 0
         }
 
         /// <summary>
@@ -150,7 +169,9 @@ namespace Dampf
         /// <returns>Ein Array mit den Tagen, Stunden, Minuten und Sekunden Spielzeit</returns>
         public static int[] ConvertPlaytime(int seconds)
         {
-            return null;
+
+            // TODO
+            return new int[] {};
         }
 
         /// <summary>
@@ -163,7 +184,11 @@ namespace Dampf
         /// <returns>Der Gesamtwert der Bibliothek</returns>
         public static double CalculateTotalLibraryValue(double[] prices)
         {
-            return 0.0;
+            double total = 0;
+
+            // TODO
+
+            return total;
         }
 
         /// <summary>
@@ -177,7 +202,11 @@ namespace Dampf
         /// <returns>Die Gesamtspielzeit der Spiele in der Bibliothek</returns>
         public static int CalculateTotalLibraryPlayTime(int[] playTimes)
         {
-            return 0;
+            int total = 0;
+
+            // TODO
+
+            return total;
         }
     }
 }
