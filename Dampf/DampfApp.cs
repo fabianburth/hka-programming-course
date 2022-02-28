@@ -58,7 +58,7 @@ namespace Dampf
 
           // TODO
 
-            return new string[];
+            return new string[0];
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Dampf
         {
           // TODO
 
-          return new string[];
+          return new string[0];
         }
 
         /// <summary>
@@ -138,9 +138,9 @@ namespace Dampf
         public static bool IsAmountLeft(double cartPrice, double accountBalance)
         {
 
-          // TODO
+            // TODO
 
-          return false
+            return false;
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Dampf
 
             // TODO
 
-            return 0
+            return 0;
         }
 
         /// <summary>
