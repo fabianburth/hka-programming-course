@@ -21,7 +21,7 @@ namespace Dampf.MVVM.Model
             Games = new ObservableCollection<Game>(Model.Games.games.Values);
             ShoppingCart = new ShoppingCart(new ObservableCollection<Game>(), 0);
             Library = new Library(new ObservableCollection<Game>());
-            User = new User(DampfApp.SetUserName(), 0.00);
+            User = new User(DampfApp.FormatUserName(DampfApp.SetUserName().ToLower()), 0.00);
             RechargeCredits = new ObservableCollection<double> {5,10,25,50,100};
         }
 

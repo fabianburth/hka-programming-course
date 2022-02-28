@@ -10,7 +10,18 @@ namespace Dampf
         /// <returns>Benutzernamen des Benutzers</returns>
         public static string SetUserName()
         {
-            return "Name";
+            return "name";
+        }
+
+        /// <summary>
+        /// In der Benutzeroberfläche soll der Benutzername immer komplett in Großbuchstaben (Upper Case) angezeigt werden.
+        /// Das soll durch diese Methode sichergestellt werden.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns>Benutzername in Großbuchstaben</returns>
+        public static string FormatUserName(string userName)
+        {
+            return userName.ToUpper();
         }
 
         /// <summary>
@@ -102,7 +113,7 @@ namespace Dampf
         ///     - Spiele ZWISCHEN   20€ und 50€ erhalten    25% Rabatt ("ZWISCHEN" schließt hier also 20€ und 50€ mitein)
         ///     - Spiele ÜBER       50€         erhalten    50% Rabatt
         /// 
-        /// Der so berechnete Preis soll dann zurückgegeben werden.
+        /// Der so berechnete Preis soll dann immer auf die nächst kleinere Ganzzahl abgerundet und zurückgegeben werden.
         /// </summary>
         /// <param name="addedGameBasePrice">Der Grundpreis des Spiels, der den Rabatt NICHT berücksichtigt.</param>
         /// <param name="discounted">Gibt an, ob es für dieses Spiel einen Rabatt gibt.</param>
@@ -125,7 +136,7 @@ namespace Dampf
                     actualGamePrice = addedGameBasePrice * 0.5;
                 }
             }
-            return actualGamePrice;
+            return Math.Floor(actualGamePrice);
         }
 
         /// <summary>
